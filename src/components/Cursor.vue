@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { gsap } from 'gsap';
-import { useGlobalStore } from '../store';
-
-const store = useGlobalStore();
 
 const outer = ref<HTMLElement | null>(null);
 const inner = ref<HTMLElement | null>(null);
@@ -14,9 +11,6 @@ const colorChangeDuration = .06;
 
 const handleMouseMove = (event: MouseEvent) => {
     if (outer.value && inner.value) {
-
-        const magneticFieldCenter = store.magneticField.center;
-        const radius = store.magneticField.radius;
 
         const outerRect = outer.value.getBoundingClientRect();
         const innerRect = inner.value.getBoundingClientRect();
