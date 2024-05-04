@@ -15,8 +15,8 @@ const handleMouseMove = (event: MouseEvent) => {
         };
 
         const mouse = {
-            x: event.clientX - cardCenter.x,
-            y: event.clientY - cardCenter.y
+            x: event.pageX - cardCenter.x,
+            y: cardCenter.y - event.pageY 
         };
 
         const rotate = {

@@ -98,9 +98,9 @@ onUnmounted(() => {
         @apply fixed rounded-full origin-center z-50
     }    
     .outer {
-        @apply bg-transparent size-[8px] outline outline-2 outline-offset-[6px] outline-white;
+        @apply bg-transparent size-[8px] outline outline-2 outline-offset-[6px] outline-white left-1/2 top-1/2;
     }
     .inner {
-        @apply bg-white size-[6px];
+        @apply bg-white size-[6px] left-1/2 top-1/2;
     }
 </style>
