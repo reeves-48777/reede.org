@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import ReedeCard from './components/ReedeCard.vue';
 import Cursor from './components/Cursor.vue';
+import ModCursor from './components/ModCursor.vue';
 import MagneticField from './components/MagneticField.vue';
 </script>
 
 <template>
-  <MagneticField>
-    <ReedeCard>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum at consequatur porro molestias dicta quas, corporis sint minus repellat sit? Accusantium harum architecto tempora id sint? Quae neque porro fuga!
-    </ReedeCard>
-  </MagneticField>
+  <ModCursor>
+    <MagneticField>
+      <ReedeCard>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum at consequatur porro molestias dicta quas, corporis sint minus repellat sit? Accusantium harum architecto tempora id sint? Quae neque porro fuga!
+      </ReedeCard>
+    </MagneticField>
+  </ModCursor>
   <Cursor />
 </template>
 

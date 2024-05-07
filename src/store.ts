@@ -1,19 +1,13 @@
 import { defineStore } from 'pinia';
-import { reactive } from 'vue';
+import { ref } from 'vue';
 
 export const useGlobalStore = defineStore('global', () => {
-    const magneticField = reactive({
-        center: {x: 0, y: 0},
-        radius: 100,
-    });
+    const modCursor = ref(false);
 
-    function setMagneticFieldCenter(centerPos: {x: number, y: number}) {
-         magneticField.center = centerPos;
-    }
+    function setModCursor(mod: boolean) {
+        console.log("set mod cursor to : ", mod);
+        modCursor.value = mod;
+    } 
 
-    function setMagneticFieldRadius(radius: number) {
-        magneticField.radius = radius;
-    }
-
-    return { magneticField, setMagneticFieldCenter, setMagneticFieldRadius };
+    return { modCursor, setModCursor };
 })
