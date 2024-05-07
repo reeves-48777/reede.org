@@ -9,42 +9,41 @@ const helper = ref<HTMLElement | null>(null);
 
 const handleMouseMove = (e: MouseEvent) => {
     if (magneticField.value &&  helper.value) {
-        const fieldRect = magneticField.value.getBoundingClientRect();
+        const rect = magneticField.value.getBoundingClientRect();
 
-        const center = {
-            x: fieldRect.left + fieldRect.width / 2,
-            y: fieldRect.top + fieldRect.height / 2,
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2
+
+        const dx = e.clientX - centerX;
+        const dy = centerY - e.clientY;
+        const angle = Math.atan2(dy, dx);
+        const tan = Math.tan(angle);
+
+        let x,y: number;
+
+        if (Math.abs(tan) > rect.height / rect.width) {
+            // top/bottom
+            y = dy < 0 ? rect.top : rect.top + rect.height;
+            x = centerX + (y - centerY) / tan;
+        } else {
+            // left/right
+            x = dx < 0 ? rect.left : rect.left + rect.width;
+            y = centerY + tan * (x - centerX)
         }
 
-        // const dx = e.pageX - center.x;
-        // const dy = center.y - e.pageY;
-        // const theta = Math.atan2(dy, dx);
-        // const tan = Math.tan(theta);
-        // let x,y: number;
-
-        // if (Math.abs(tan) > fieldRect.height / fieldRect.width) {
-        //     // top/bottom
-        //     y = dy < 0 ? fieldRect.top : fieldRect.top + fieldRect.height;
-        //     x = center.x + (y - center.y) / tan;
-        // } else {
-        //     // left/right
-        //     x = dx < 0 ? fieldRect.left : fieldRect.left + fieldRect.width;
-        //     y = center.y + tan * (x - center.x)
-        // }
-
-        // x = Math.max(fieldRect.left, Math.min(x, fieldRect.right));
-        // y = Math.max(fieldRect.top, Math.min(y, fieldRect.bottom));
+        x = Math.max(rect.left, Math.min(x, rect.right));
+        y = Math.max(rect.top, Math.min(y, rect.bottom));
 
         // console.log(fieldRect.left, fieldRect.right);
         // console.log(fieldRect.top, fieldRect.bottom);
         // console.log(x, y);
 
-        // gsap.to(helper.value, {
-        //     duration: .01,
-        //     x: x,
-        //     y: y,
-        //     ease: 'power1.out'
-        // });
+        gsap.to(helper.value, {
+            duration: .01,
+            x: x,
+            y: y,
+            ease: 'power1.out'
+        });
         // gsap.to(helper.value, {
         //     x: center.x,
         //     y: center.y
@@ -79,6 +78,6 @@ onUnmounted(() => {
     }
 
     .helper {
-        @apply absolute bg-red-600 size-2 rounded-full z-50 left-1/2 top-1/2;
+        @apply absolute bg-red-600 size-2 rounded-full z-50 left-1/2 top-1/2 pointer-events-none;
     }
 </style>
